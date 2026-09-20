@@ -2,16 +2,49 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ojol Kecamatan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>OJOL Suruh - Ojek Online Kecamatan Suruh</title>
+  <meta name="description" content="Jembatan penumpang & driver warga Suruh, Trenggalek. Pickup Suruh, tujuan Trenggalek. Motor & Mobil." />
+  <meta name="theme-color" content="#22c55e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="OJOL Suruh" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
   <link rel="stylesheet" href="./css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* PWA Install Banner */
+    #installBanner{display:none;position:fixed;bottom:90px;left:12px;right:12px;max-width:456px;margin:0 auto;background:rgba(21,28,37,0.96);backdrop-filter:blur(16px);border:1px solid #22c55e;border-radius:16px;padding:12px 14px;z-index:60;box-shadow:0 8px 24px rgba(0,0,0,0.4);align-items:center;gap:12px;animation:slideUp 0.4s ease}
+    #installBanner.show{display:flex}
+    #installBanner img{width:48px;height:48px;border-radius:12px;flex-shrink:0}
+    #installBanner .install-text{flex:1}
+    #installBanner .install-text b{display:block;font-size:13px}
+    #installBanner .install-text span{font-size:11px;color:#8aa0b8}
+    #installBanner button{border:0;border-radius:10px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:12px}
+    #installBanner #btnInstallApp{background:#22c55e;color:#052e16}
+    #installBanner #btnCloseInstall{background:#1d2633;color:#e6edf5;border:1px solid #263240;margin-left:6px}
+    @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+  </style>
 </head>
 <body>
   <div id="app">
-    <header class="header"><div class="brand">🛵 OJOL</div><div id="userBadge" class="badge hidden"></div></header>
+    <header class="header"><div class="brand">🛵 OJOL SURUH</div><div id="userBadge" class="badge hidden"></div></header>
     <main id="router"></main>
-    <nav class="bottom-nav"><a href="#/" data-nav>🏠 Home</a><a href="#/passenger" data-nav>🧍 Penumpang</a><a href="#/driver" data-nav>🏍️ Driver</a><a href="#/profile" data-nav>👤 Profil</a></nav>
+    <nav class="bottom-nav">
+      <a href="#/" data-nav><span class="nav-icon">🏠</span><span class="nav-label">Home</span></a>
+      <a href="#/passenger" data-nav><span class="nav-icon">🧍</span><span class="nav-label">Penumpang</span></a>
+      <a href="#/driver" data-nav><span class="nav-icon">🏍️</span><span class="nav-label">Driver</span></a>
+      <a href="#/profile" data-nav><span class="nav-icon">👤</span><span class="nav-label">Profil</span></a>
+    </nav>
+    <!-- PWA Install Banner -->
+    <div id="installBanner">
+      <img src="./icons/icon-192.png" alt="OJOL" />
+      <div class="install-text"><b>Install OJOL Suruh</b><span>Pasang di HP biar buka lebih cepat & offline</span></div>
+      <button id="btnInstallApp">Install</button>
+      <button id="btnCloseInstall">✕</button>
+    </div>
   </div>
   <script type="module" src="./lib/app.js"></script>
 </body>
