@@ -1,5 +1,5 @@
 // sw.js v7 tracking - Standard Clean
-const CACHE_NAME = 'ojol-suruh-v7-tracking';
+const CACHE_NAME = 'ojol-suruh-v8-admin';
 
 const CORE_ASSETS = [
   './',
@@ -16,6 +16,7 @@ const CORE_ASSETS = [
   './lib/app/supabase.js',
   './lib/app/push.js',
   './lib/app/tracking.js',
+  './lib/app/report.js',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
