@@ -1,5 +1,5 @@
 // sw.js v6.0 Standard - Clean, hanya pakai /icons/
-const CACHE_NAME = 'ojol-suruh-v6';
+const CACHE_NAME = 'ojol-suruh-v6-1-highlight';
 
 const CORE_ASSETS = [
   './',
