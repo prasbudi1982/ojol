@@ -4,21 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ojol Kecamatan</title>
-  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/style.css?v=11" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="app">
-    <header class="header"><div class="brand">🛵 OJOL</div><div id="userBadge" class="badge hidden"></div></header>
+    <header class="header"><div class="brand">🛵 OJOL SURUH</div><div id="userBadge" class="badge hidden"></div></header>
     <main id="router"></main>
-    <nav class="bottom-nav">
-      <a href="#/" data-nav>🏠 Home</a>
-      <a href="#/passenger" data-nav>🧍 Penumpang</a>
-      <a href="#/driver" data-nav>🏍️ Driver</a>
-      <a href="#/profile" data-nav>👤 Profil</a>
-      <a href="#/admin" data-nav id="navAdmin" style="display:none;flex-direction:column">🛡️ Admin</a>
+    <nav class="bottom-nav" id="bottomNav">
+      <a href="#/" data-nav><span class="nav-icon">🏠</span><span class="nav-label">HOME</span></a>
+      <a href="#/passenger" data-nav><span class="nav-icon">🧍</span><span class="nav-label">PENUMPANG</span></a>
+      <a href="#/driver" data-nav><span class="nav-icon">🏍️</span><span class="nav-label">DRIVER</span></a>
+      <a href="#/profile" data-nav><span class="nav-icon">👤</span><span class="nav-label">PROFIL</span></a>
+      <a href="#/admin" data-nav id="navAdmin" style="display:none"><span class="nav-icon">🛡️</span><span class="nav-label">ADMIN</span></a>
     </nav>
   </div>
-  <script type="module" src="./lib/app.js"></script>
+  <script type="module" src="./lib/app.js?v=11"></script>
 </body>
 </html>
