@@ -1,5 +1,5 @@
 // sw.js v7 tracking - Standard Clean
-const CACHE_NAME = 'ojol-suruh-v8-admin';
+const CACHE_NAME = 'ojol-suruh-v9-admin-fix';
 
 const CORE_ASSETS = [
   './',
