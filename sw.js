@@ -1,5 +1,5 @@
-// sw.js v6.0 Standard - Clean, hanya pakai /icons/
-const CACHE_NAME = 'ojol-suruh-v6-2-edit-profile';
+// sw.js v7 tracking - Standard Clean
+const CACHE_NAME = 'ojol-suruh-v7-tracking';
 
 const CORE_ASSETS = [
   './',
@@ -15,6 +15,7 @@ const CORE_ASSETS = [
   './lib/app/views.js',
   './lib/app/supabase.js',
   './lib/app/push.js',
+  './lib/app/tracking.js',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
@@ -37,7 +38,6 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.url.includes('supabase.co') || e.request.url.includes('nominatim.openstreetmap.org')) return;
-  
   if (e.request.mode === 'navigate') {
     e.respondWith(fetch(e.request).catch(() => caches.match('./index.html')));
     return;
@@ -47,11 +47,9 @@ self.addEventListener('fetch', e => {
   );
 });
 
-// Push Notification
 self.addEventListener('push', e => {
   let data = { title: 'OJOL Suruh', body: 'Ada order baru!', url: './index.html#/driver' };
   try { if (e.data) data = { ...data, ...e.data.json() }; } catch(err){}
-  
   e.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,
