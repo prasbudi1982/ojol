@@ -27,7 +27,11 @@
     #installBanner #btnCloseInstall{background:#1d2633;color:#e6edf5;border:1px solid #263240;margin-left:6px}
     @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
   
-    /* admin & bottom-nav styled via css/style.css - jangan override di sini */
+    .admin-page .card{padding:10px;border:1px solid #eee;border-radius:12px;background:white;margin-bottom:8px}
+    /* Bottom nav scroll for 6 items */
+    .bottom-nav{display:flex;overflow-x:auto;gap:4px}
+    .bottom-nav a{flex:1;min-width:60px;text-align:center;padding:8px 4px;text-decoration:none;color:#666;font-size:10px}
+    .bottom-nav a.active{color:#16a34a;font-weight:bold}
     </style>
 </head>
 <body>
@@ -38,6 +42,7 @@
       <a href="#/" data-nav><span class="nav-icon">🏠</span><span class="nav-label">Home</span></a>
       <a href="#/passenger" data-nav><span class="nav-icon">🧍</span><span class="nav-label">Penumpang</span></a>
       <a href="#/driver" data-nav><span class="nav-icon">🏍️</span><span class="nav-label">Driver</span></a>
+      <a href="#/history" data-nav><span class="nav-icon">📜</span><span class="nav-label">Histori</span></a>
       <a href="#/profile" data-nav><span class="nav-icon">👤</span><span class="nav-label">Profil</span></a>
       <a href="#/admin" data-nav style="display:none"><span class="nav-icon">👑</span><span class="nav-label">Admin</span></a>
       <a href="#/admin/settings" data-nav style="display:none"><span class="nav-icon">⚙️</span><span class="nav-label">Setting</span></a>
