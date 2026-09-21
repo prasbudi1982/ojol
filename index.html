@@ -27,7 +27,7 @@
     #installBanner #btnCloseInstall{background:#1d2633;color:#e6edf5;border:1px solid #263240;margin-left:6px}
     @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
   
-    /* admin-page now styled via css/style.css */
+    /* admin & bottom-nav styled via css/style.css - jangan override di sini */
     </style>
 </head>
 <body>
@@ -68,7 +68,6 @@
       <button id="btnCloseInstall">✕</button>
     </div>
   </div>
-  <script>/* FORCE CLEAR OLD SW */ if("serviceWorker" in navigator){ navigator.serviceWorker.getRegistrations().then(regs=>{ regs.forEach(r=>{ console.log("Unregister old SW", r.scope); r.unregister(); }); }); if(window.caches){ caches.keys().then(k=>k.forEach(c=>caches.delete(c))); } } localStorage.removeItem("pwa-install-dismissed");</script>
-  <script type="module" src="./lib/app.js?v=1789950771"></script>
+  <script type="module" src="./lib/app.js"></script>
 </body>
 </html>
