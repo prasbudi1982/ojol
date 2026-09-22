@@ -1,5 +1,6 @@
 // sw.js - v7 FORCE UPDATE - hapus cache lama
-const CACHE_NAME = 'ojol-suruh-v7-' + Date.now();
+// v7.1 - THEME ADAPTIF - force refresh CSS tema HP
+const CACHE_NAME = 'ojol-suruh-v7.1-' + Date.now();
 const URLS_TO_CACHE = [
   './',
   './index.html',

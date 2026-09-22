@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>OJOL Suruh - Ojek Online Kecamatan Suruh</title>
+  <title>MINI OJOL - Suruh - Trenggalek</title>
   <meta name="description" content="Jembatan penumpang & driver warga Suruh, Trenggalek. Pickup Suruh, tujuan Trenggalek. Motor & Mobil." />
   <meta name="color-scheme" content="light dark" />
+  <!-- theme-color akan di-update otomatis via JS agar sesuai tema HP -->
   <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#22c55e" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="OJOL Suruh" />
@@ -18,20 +18,24 @@
   <link rel="stylesheet" href="./css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* PWA Install Banner */
-    #installBanner{display:none;position:fixed;bottom:90px;left:12px;right:12px;max-width:456px;margin:0 auto;background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:16px;padding:12px 14px;z-index:60;box-shadow:0 8px 24px rgba(0,0,0,0.4);align-items:center;gap:12px;animation:slideUp 0.4s ease}
+    /* PWA Install Banner - adaptif tema */
+    #installBanner{display:none;position:fixed;bottom:90px;left:12px;right:12px;max-width:456px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:12px 14px;z-index:60;box-shadow:0 8px 24px var(--shadow);align-items:center;gap:12px;animation:slideUp 0.4s ease}
     #installBanner.show{display:flex}
     #installBanner img{width:48px;height:48px;border-radius:12px;flex-shrink:0}
     #installBanner .install-text{flex:1}
-    #installBanner .install-text b{display:block;font-size:13px}
-    #installBanner .install-text span{font-size:11px;color:#8aa0b8}
+    #installBanner .install-text b{display:block;font-size:13px;color:var(--text)}
+    #installBanner .install-text span{font-size:11px;color:var(--muted)}
     #installBanner button{border:0;border-radius:10px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:12px}
-    #installBanner #btnInstallApp{background:#22c55e;color:#052e16}
-    #installBanner #btnCloseInstall{background:#1d2633;color:#e6edf5;border:1px solid #263240;margin-left:6px}
+    #installBanner #btnInstallApp{background:var(--primary);color:#052e16}
+    #installBanner #btnCloseInstall{background:var(--card2);color:var(--text);border:1px solid var(--border);margin-left:6px}
     @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
   
     .admin-page .card{padding:10px;border:1px solid var(--border);border-radius:12px;background:var(--card);margin-bottom:8px}
-    </style>
+    /* Bottom nav scroll for 6 items */
+    .bottom-nav{display:flex;overflow-x:auto;gap:4px}
+    .bottom-nav a{flex:1;min-width:60px;text-align:center;padding:8px 4px;text-decoration:none;color:#666;font-size:10px}
+    .bottom-nav a.active{color:#16a34a;font-weight:bold}
+  </style>
 </head>
 <body>
   <div id="app">
@@ -41,6 +45,7 @@
       <a href="#/" data-nav><span class="nav-icon">🏠</span><span class="nav-label">Home</span></a>
       <a href="#/passenger" data-nav><span class="nav-icon">🧍</span><span class="nav-label">Penumpang</span></a>
       <a href="#/driver" data-nav><span class="nav-icon">🏍️</span><span class="nav-label">Driver</span></a>
+      <a href="#/history" data-nav><span class="nav-icon">📜</span><span class="nav-label">Histori</span></a>
       <a href="#/profile" data-nav><span class="nav-icon">👤</span><span class="nav-label">Profil</span></a>
       <a href="#/admin" data-nav style="display:none"><span class="nav-icon">👑</span><span class="nav-label">Admin</span></a>
       <a href="#/admin/settings" data-nav style="display:none"><span class="nav-icon">⚙️</span><span class="nav-label">Setting</span></a>
@@ -48,12 +53,12 @@
 
     <!-- Map Picker Modal -->
     <div id="mapModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;padding:12px">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;width:100%;max-width:500px;max-height:90vh;display:flex;flex-direction:column">
-        <div style="padding:12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)"><b>📍 Pilih Lokasi</b><button id="btnCloseMap" style="border:none;background:#eee;border-radius:50%;width:32px;height:32px">✕</button></div>
-        <div id="leafletMap" style="height:350px;width:100%;background:#e5e7eb"></div>
+      <div style="background:var(--card);border-radius:16px;width:100%;max-width:500px;max-height:90vh;display:flex;flex-direction:column;border:1px solid var(--border)">
+        <div style="padding:12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)"><b>📍 Pilih Lokasi</b><button id="btnCloseMap" style="border:none;background:var(--card2);color:var(--text);border-radius:50%;width:32px;height:32px">✕</button></div>
+        <div id="leafletMap" style="height:350px;width:100%;background:var(--card2)"></div>
         <div style="padding:12px">
-          <div id="mapSelectedAddress" style="font-size:12px;margin-bottom:4px">Pilih titik di peta</div>
-          <div id="mapSelectedCoords" style="font-size:10px;color:#666"></div>
+          <div id="mapSelectedAddress" style="font-size:12px;margin-bottom:4px;color:var(--text)">Pilih titik di peta</div>
+          <div id="mapSelectedCoords" style="font-size:10px;color:var(--muted)"></div>
           <div id="mapTrenggalekBadge" style="margin-top:6px;padding:4px 8px;border-radius:8px;font-size:11px;text-align:center;background:#16a34a;color:white">✅ DALAM KAB. TRENGGALEK</div>
           <div style="display:flex;gap:8px;margin-top:10px">
             <button id="btnConfirmMap" class="btn primary" style="flex:1;background:#16a34a">✅ Pakai Lokasi Ini</button>
@@ -71,6 +76,27 @@
       <button id="btnCloseInstall">✕</button>
     </div>
   </div>
-  <script type="module" src="./lib/app.js?v=18-modal-fix"></script>
+  <script>
+  // THEME SYNC - Sesuaikan dengan tema HP
+  (function(){
+    const mql = window.matchMedia('(prefers-color-scheme: light)');
+    function applySystemTheme(isLight){
+      // Update meta theme-color agar status bar HP ikut ganti
+      let meta = document.querySelector('meta[name="theme-color"]:not([media])');
+      if(!meta){
+        meta = document.createElement('meta');
+        meta.name = 'theme-color';
+        document.head.appendChild(meta);
+      }
+      meta.content = isLight ? '#ffffff' : '#0b0f14';
+      document.documentElement.setAttribute('data-theme', isLight ? 'light' : 'dark');
+      // Update warna leaflet placeholder jika ada
+    }
+    applySystemTheme(mql.matches);
+    // Dengarkan perubahan tema HP secara live
+    mql.addEventListener ? mql.addEventListener('change', e => applySystemTheme(e.matches)) : mql.addListener(e => applySystemTheme(e.matches));
+  })();
+  </script>
+  <script type="module" src="./lib/app.js"></script>
 </body>
 </html>
