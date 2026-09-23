@@ -45,13 +45,17 @@
       <a href="#/" data-nav><span class="nav-icon">🏠</span><span class="nav-label">Home</span></a>
       <a href="#/passenger" data-nav><span class="nav-icon">🧍</span><span class="nav-label">Penumpang</span></a>
       <a href="#/driver" data-nav><span class="nav-icon">🏍️</span><span class="nav-label">Driver</span></a>
+      <a href="#/store" data-nav><span class="nav-icon">🍔</span><span class="nav-label">Food</span></a>
       <a href="#/history" data-nav><span class="nav-icon">📜</span><span class="nav-label">Histori</span></a>
       <a href="#/profile" data-nav><span class="nav-icon">👤</span><span class="nav-label">Profil</span></a>
+      <!-- MERCHANT ONLY TABS -->
+      <a href="#/store/my" data-nav-merchant style="display:none"><span class="nav-icon">🏪</span><span class="nav-label">Warungku</span></a>
+      <a href="#/store/products" data-nav-merchant style="display:none"><span class="nav-icon">📦</span><span class="nav-label">Menu</span></a>
       <a href="#/admin" data-nav style="display:none"><span class="nav-icon">👑</span><span class="nav-label">Admin</span></a>
       <a href="#/admin/settings" data-nav style="display:none"><span class="nav-icon">⚙️</span><span class="nav-label">Setting</span></a>
     </nav>
 
-        <!-- Map Picker Modal -->
+    <!-- Map Picker Modal -->
     <div id="mapModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;padding:12px">
       <div style="background:var(--card);border-radius:16px;width:100%;max-width:500px;max-height:90vh;display:flex;flex-direction:column;border:1px solid var(--border)">
         <div style="padding:12px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)"><b>📍 Pilih Lokasi</b><button id="btnCloseMap" style="border:none;background:var(--card2);color:var(--text);border-radius:50%;width:32px;height:32px">✕</button></div>
