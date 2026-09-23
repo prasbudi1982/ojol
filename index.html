@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>MINI OJOL - Suruh - Trenggalek</title>
-  <meta name="description" content="Jembatan penumpang & driver warga Suruh, Trenggalek. Pickup Suruh, tujuan Trenggalek. Motor & Mobil." />
+  <meta name="description" content="Jembatan penumpang & driver warga Suruh, Trenggalek. Pickup Suruh, tujuan Trenggalek. Motor & Mobil + Food Delivery Warung." />
   <meta name="color-scheme" content="light dark" />
-  <!-- theme-color akan di-update otomatis via JS agar sesuai tema HP -->
   <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -18,7 +17,7 @@
   <link rel="stylesheet" href="./css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* PWA Install Banner - adaptif tema */
+    /* PWA Install Banner */
     #installBanner{display:none;position:fixed;bottom:90px;left:12px;right:12px;max-width:456px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:12px 14px;z-index:60;box-shadow:0 8px 24px var(--shadow);align-items:center;gap:12px;animation:slideUp 0.4s ease}
     #installBanner.show{display:flex}
     #installBanner img{width:48px;height:48px;border-radius:12px;flex-shrink:0}
@@ -31,28 +30,89 @@
     @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
   
     .admin-page .card{padding:10px;border:1px solid var(--border);border-radius:12px;background:var(--card);margin-bottom:8px}
-    /* Bottom nav scroll for 6 items */
-    .bottom-nav{display:flex;overflow-x:auto;gap:4px}
-    .bottom-nav a{flex:1;min-width:60px;text-align:center;padding:8px 4px;text-decoration:none;color:#666;font-size:10px}
-    .bottom-nav a.active{color:#16a34a;font-weight:bold}
+    
+    /* Bottom nav - scrollable for many tabs */
+    .bottom-nav{
+      position:fixed;bottom:0;left:0;right:0;
+      display:flex;overflow-x:auto;gap:2px;
+      background:var(--nav-bg);backdrop-filter:blur(20px) saturate(1.5);
+      border-top:1px solid var(--nav-border);
+      padding:10px 6px calc(10px + env(safe-area-inset-bottom));
+      max-width:480px;margin:0 auto;z-index:40;
+      box-shadow:0 -10px 40px var(--shadow);
+      border-radius:24px 24px 0 0;
+      scrollbar-width:none;
+    }
+    .bottom-nav::-webkit-scrollbar{display:none}
+    .bottom-nav a{
+      flex:1;min-width:58px;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:3px;
+      color:var(--muted);font-weight:700;padding:8px 4px;border-radius:16px;
+      text-decoration:none;transition:all 0.28s cubic-bezier(0.4,0,0.2,1);
+      min-height:56px;text-transform:uppercase;letter-spacing:0.2px;position:relative;
+    }
+    .bottom-nav a .nav-icon{font-size:20px;line-height:1;transition:transform 0.28s}
+    .bottom-nav a .nav-label{font-size:9.5px;line-height:1;margin-top:1px;white-space:nowrap}
+    .bottom-nav a.active{
+      color:#052e16;background:linear-gradient(135deg,var(--primary),#86efac);
+      box-shadow:0 6px 20px rgba(34,197,94,0.38);transform:translateY(-3px) scale(1.02);
+    }
+    .bottom-nav a[data-role="merchant"].active{
+      background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#111;
+      box-shadow:0 6px 20px rgba(245,158,11,0.4);
+    }
+    .bottom-nav a[href="#/store"].active{
+      background:linear-gradient(135deg,#f97316,#fb923c);color:white;
+    }
+    .bottom-nav a[href="#/driver"].active{
+      background:linear-gradient(135deg,#3b82f6,#60a5fa);color:white;
+    }
+    @media (prefers-color-scheme: light){
+      .bottom-nav a.active{color:#052e16}
+      .bottom-nav a[data-role="merchant"].active{color:#111}
+      .bottom-nav a[href="#/store"].active, .bottom-nav a[href="#/driver"].active{color:white}
+    }
+    .bottom-nav a.active .nav-icon{transform:scale(1.1)}
+    .bottom-nav a.active::after{
+      content:'';position:absolute;bottom:-6px;width:22px;height:4px;background:var(--primary);border-radius:99px;
+    }
+    .bottom-nav a[data-role="merchant"].active::after{background:#f59e0b}
+    .bottom-nav a[href="#/store"].active::after{background:#f97316}
+    .bottom-nav a:not(.active):active{transform:scale(0.92)}
   </style>
 </head>
 <body>
   <div id="app">
     <header class="header"><div class="brand">🛵 OJOL SURUH</div><div id="userBadge" class="badge hidden"></div></header>
     <main id="router"></main>
-        <nav class="bottom-nav">
-      <a href="#/" data-nav><span class="nav-icon">🏠</span><span class="nav-label">Home</span></a>
-      <a href="#/passenger" data-nav><span class="nav-icon">🧍</span><span class="nav-label">Penumpang</span></a>
-      <a href="#/driver" data-nav><span class="nav-icon">🏍️</span><span class="nav-label">Driver</span></a>
-      <a href="#/store" data-nav><span class="nav-icon">🍔</span><span class="nav-label">Food</span></a>
-      <a href="#/history" data-nav><span class="nav-icon">📜</span><span class="nav-label">Histori</span></a>
-      <a href="#/profile" data-nav><span class="nav-icon">👤</span><span class="nav-label">Profil</span></a>
-      <!-- MERCHANT ONLY TABS -->
-      <a href="#/store/my" data-nav-merchant style="display:none"><span class="nav-icon">🏪</span><span class="nav-label">Warungku</span></a>
-      <a href="#/store/products" data-nav-merchant style="display:none"><span class="nav-icon">📦</span><span class="nav-label">Menu</span></a>
-      <a href="#/admin" data-nav style="display:none"><span class="nav-icon">👑</span><span class="nav-label">Admin</span></a>
-      <a href="#/admin/settings" data-nav style="display:none"><span class="nav-icon">⚙️</span><span class="nav-label">Setting</span></a>
+    <nav class="bottom-nav" id="bottomNav">
+      <!-- COMMON - semua role lihat -->
+      <a href="#/" data-nav="home" data-role="all"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></a>
+      
+      <!-- PASSENGER ONLY -->
+      <a href="#/passenger" data-nav="passenger" data-role="passenger"><span class="nav-icon">🧍</span><span class="nav-label">Ojek</span></a>
+      
+      <!-- DRIVER ONLY -->
+      <a href="#/driver" data-nav="driver" data-role="driver"><span class="nav-icon">🏍️</span><span class="nav-label">Driver</span></a>
+      
+      <!-- FOOD - penumpang & driver (customer + driver food) -->
+      <a href="#/store" data-nav="store" data-role="passenger driver"><span class="nav-icon">🍔</span><span class="nav-label">Food</span></a>
+      
+      <!-- FOOD CART - penumpang & driver -->
+      <a href="#/store/cart" data-nav="cart" data-role="passenger driver"><span class="nav-icon">🛒</span><span class="nav-label">Keranjang</span><span id="cartBadge" style="display:none;position:absolute;top:4px;right:12px;background:#ef4444;color:white;font-size:9px;padding:1px 5px;border-radius:99px;font-weight:800">0</span></a>
+
+      <!-- MERCHANT ONLY -->
+      <a href="#/store/my" data-nav="myStore" data-role="merchant"><span class="nav-icon">🏪</span><span class="nav-label">Warungku</span></a>
+      <a href="#/store/products" data-nav="products" data-role="merchant"><span class="nav-icon">📦</span><span class="nav-label">Menu</span></a>
+      <a href="#/store/orders" data-nav="storeOrders" data-role="merchant"><span class="nav-icon">🔔</span><span class="nav-label">Pesanan</span><span id="merchantOrderBadge" style="display:none;position:absolute;top:4px;right:8px;background:#ef4444;color:white;font-size:9px;padding:1px 5px;border-radius:99px">0</span></a>
+
+      <!-- COMMON -->
+      <a href="#/history" data-nav="history" data-role="passenger driver merchant"><span class="nav-icon">📜</span><span class="nav-label">Histori</span></a>
+      <a href="#/profile" data-nav="profile" data-role="all"><span class="nav-icon">👤</span><span class="nav-label">Profil</span></a>
+
+      <!-- ADMIN ONLY -->
+      <a href="#/admin" data-nav="admin" data-role="admin"><span class="nav-icon">👑</span><span class="nav-label">Admin</span></a>
+      <a href="#/admin/settings" data-nav="adminSettings" data-role="admin"><span class="nav-icon">⚙️</span><span class="nav-label">Setting</span></a>
     </nav>
 
     <!-- Map Picker Modal -->
@@ -81,23 +141,15 @@
     </div>
   </div>
   <script>
-  // THEME SYNC - Sesuaikan dengan tema HP
   (function(){
     const mql = window.matchMedia('(prefers-color-scheme: light)');
     function applySystemTheme(isLight){
-      // Update meta theme-color agar status bar HP ikut ganti
       let meta = document.querySelector('meta[name="theme-color"]:not([media])');
-      if(!meta){
-        meta = document.createElement('meta');
-        meta.name = 'theme-color';
-        document.head.appendChild(meta);
-      }
+      if(!meta){ meta = document.createElement('meta'); meta.name = 'theme-color'; document.head.appendChild(meta); }
       meta.content = isLight ? '#ffffff' : '#0b0f14';
       document.documentElement.setAttribute('data-theme', isLight ? 'light' : 'dark');
-      // Update warna leaflet placeholder jika ada
     }
     applySystemTheme(mql.matches);
-    // Dengarkan perubahan tema HP secara live
     mql.addEventListener ? mql.addEventListener('change', e => applySystemTheme(e.matches)) : mql.addListener(e => applySystemTheme(e.matches));
   })();
   </script>
