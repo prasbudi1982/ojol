@@ -1,7 +1,7 @@
 {
-  "name": "OJOL Suruh - Ojek Online Kecamatan Suruh",
-  "short_name": "OJOL Suruh",
-  "description": "Jembatan penumpang & driver warga Kecamatan Suruh, Trenggalek.",
+  "name": "MIJO Suruh - UMKM Lokal Kecamatan Suruh",
+  "short_name": "MIJO Suruh",
+  "description": "Ekosistem Digital UMKM Kecamatan Suruh, Trenggalek.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
